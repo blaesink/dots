@@ -81,7 +81,7 @@
     interactiveShellInit = ''
       set fish_greeting
       if not pgrep ssh-agent > /dev/null
-        eval (ssh-agent -c)
+        eval (ssh-agent -c) > /dev/null
       end
       fish_add_path /root/.local/bin
     '';
