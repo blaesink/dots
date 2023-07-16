@@ -21,18 +21,18 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
-	pkgs.git
-	pkgs.neovim
-	pkgs.sapling
-	pkgs.rustup
-	pkgs.gnumake
-	pkgs.which
-	pkgs.openssh
 	pkgs.fd
+	pkgs.fzf
+	pkgs.gh
+	pkgs.git
+	pkgs.gnumake
+	pkgs.neovim
+	pkgs.openssh
 	pkgs.ripgrep
-  pkgs.gh
-
-    pkgs.gcc
+	pkgs.rustup
+	pkgs.sapling
+	pkgs.which
+    	pkgs.gcc
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
