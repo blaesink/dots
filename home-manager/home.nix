@@ -33,6 +33,7 @@
     pkgs.sapling
     pkgs.which
     pkgs.gcc
+    pkgs.zoxide
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -92,6 +93,14 @@
         alias v="lvim"
         alias ff="lvim (fd --type f | fzf)"
       end
+
+      abbr --erase z &>/dev/null
+      alias z=__zoxide_z
+
+      abbr --erase zi &>/dev/null
+      alias zi=__zoxide_zi
+
+      zoxide init fish | source
     '';
   };
 
