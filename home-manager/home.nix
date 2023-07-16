@@ -21,18 +21,18 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
-	pkgs.fd
-	pkgs.fzf
-	pkgs.gh
-	pkgs.git
-	pkgs.gnumake
-	pkgs.neovim
-	pkgs.openssh
-	pkgs.ripgrep
-	pkgs.rustup
-	pkgs.sapling
-	pkgs.which
-    	pkgs.gcc
+    pkgs.fd
+    pkgs.fzf
+    pkgs.gh
+    pkgs.git
+    pkgs.gnumake
+    pkgs.neovim
+    pkgs.openssh
+    pkgs.ripgrep
+    pkgs.rustup
+    pkgs.sapling
+    pkgs.which
+    pkgs.gcc
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -84,6 +84,14 @@
         eval (ssh-agent -c) > /dev/null
       end
       fish_add_path /root/.local/bin
+
+      alias sls="sl status"
+      alias sld="sl diff"
+
+      if type -q lvim
+        alias v="lvim"
+        alias ff="lvim (fd --type f | fzf)"
+      end
     '';
   };
 
