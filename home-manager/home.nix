@@ -56,13 +56,16 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
+    ".config/fd/ignore".text = ''
+    **/zig-cache/
+    '';
+
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
-
   # You can also manage environment variables but you will have to manually
   # source
   #
@@ -81,27 +84,30 @@
     enable=true;
     interactiveShellInit = ''
       set fish_greeting
+      set FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix'
       if not pgrep ssh-agent > /dev/null
         eval (ssh-agent -c) > /dev/null
       end
       fish_add_path /root/.local/bin
 
-      alias sls="sl status"
-      alias sld="sl diff"
 
       if type -q lvim
+        set -gx EDITOR lvim
         alias v="lvim"
-        alias ff="lvim (fd --type f | fzf)"
       end
 
       abbr --erase z &>/dev/null
-      alias z=__zoxide_z
-
       abbr --erase zi &>/dev/null
-      alias zi=__zoxide_zi
 
       zoxide init fish | source
     '';
+    shellAliases = {
+      sls="sl status";
+      sld="sl diff";
+      zi="__zoxide_zi";
+      z="__zoxide_z";
+      ff="fzf --bind 'enter:become($EDITOR {})'";
+    };
   };
 
   programs.ssh = {
