@@ -98,6 +98,7 @@
     fd
     fish
     fzf
+    fzy # fzf with "better default behavior"
     gcc13
     gh
     git

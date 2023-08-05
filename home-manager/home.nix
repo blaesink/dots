@@ -51,6 +51,7 @@
       alias zi="__zoxide_zi"
       alias z="__zoxide_z"
       alias ff="fzf --bind 'enter:become($EDITOR {})'"
+      alias fy="clear && fd -t f | fzy | xargs -I {} $EDITOR {}"
 
       zoxide init fish | source
 
