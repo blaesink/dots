@@ -108,6 +108,7 @@
     ripgrep
     sapling
     starship
+    wezterm
     zlib
     zoxide
   #  wget
