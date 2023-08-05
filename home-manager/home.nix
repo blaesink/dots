@@ -43,6 +43,7 @@
       if type -q lvim
         set -gx EDITOR lvim
         alias v="lvim"
+        alias vim="lvim"
       end
 
       # Aliases
