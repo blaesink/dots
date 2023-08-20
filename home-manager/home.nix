@@ -27,39 +27,13 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
+    ".config/lvim/config.lua".source = dotfiles/lvim/config.lua;
+
     ".config/fd/ignore".text = ''
     **/zig-cache/
     '';
 
-    ".config/fish/config.fish".text = ''
-      set fish_greeting
-      set FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix'
-
-      fish_add_path ~/.local/bin
-
-      abbr --erase z &>/dev/null
-      abbr --erase zi &>/dev/null
-
-      if type -q lvim
-        set -gx EDITOR lvim
-        alias v="lvim"
-        alias vim="lvim"
-      end
-
-      # Aliases
-      alias sls="sl status"
-      alias sld="sl diff"
-      alias zi="__zoxide_zi"
-      alias z="__zoxide_z"
-      alias ff="fzf --bind 'enter:become($EDITOR {})'"
-      alias fy="clear && fd -t f | fzy | xargs -I {} $EDITOR {}"
-
-      zoxide init fish | source
-
-      if type -q starship
-        eval (starship init fish)
-      end
-    '';
+    ".config/fish/config.fish".source = dotfiles/fish/config.fish;
     };
 
   # Let Home Manager install and manage itself.
