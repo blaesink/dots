@@ -98,6 +98,7 @@
     fd
     fish
     fzf
+    fzy # fzf with "better default behavior"
     gcc13
     gh
     git
@@ -107,9 +108,9 @@
     ripgrep
     sapling
     starship
+    wezterm
     zlib
     zoxide
-  #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

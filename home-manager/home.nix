@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "root";
-  home.homeDirectory = "/root";
+  home.username = "lich";
+  home.homeDirectory = "/home/lich";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -17,36 +17,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-    pkgs.fd
-    pkgs.fzf
-    pkgs.gh
-    pkgs.git
-    pkgs.gnumake
-    pkgs.neovim
-    pkgs.openssh
-    pkgs.ripgrep
-    pkgs.rustup
-    pkgs.sapling
-    pkgs.which
-    pkgs.gcc
-    pkgs.zoxide
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
+  home.packages = [];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -56,69 +27,14 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
+    ".config/lvim/config.lua".source = dotfiles/lvim/config.lua;
+
     ".config/fd/ignore".text = ''
     **/zig-cache/
     '';
 
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
-  # You can also manage environment variables but you will have to manually
-  # source
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/root/etc/profile.d/hm-session-vars.sh
-  #
-  # if you don't want to manage your shell through Home Manager.
-  home.sessionVariables = {
-    SSH_ASKPASS_REQUIRE="prefer";
-  };
-
-  programs.fish = {
-    enable=true;
-    interactiveShellInit = ''
-      set fish_greeting
-      set FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix'
-      if not pgrep ssh-agent > /dev/null
-        eval (ssh-agent -c) > /dev/null
-      end
-      fish_add_path /root/.local/bin
-
-
-      if type -q lvim
-        set -gx EDITOR lvim
-        alias v="lvim"
-      end
-
-      abbr --erase z &>/dev/null
-      abbr --erase zi &>/dev/null
-
-      zoxide init fish | source
-    '';
-    shellAliases = {
-      sls="sl status";
-      sld="sl diff";
-      zi="__zoxide_zi";
-      z="__zoxide_z";
-      ff="fzf --bind 'enter:become($EDITOR {})'";
+    ".config/fish/config.fish".source = dotfiles/fish/config.fish;
     };
-  };
-
-  programs.ssh = {
-    enable = true;
-  };
-
-  programs.starship = {
-    enable=true;
-    enableFishIntegration=true;
-    enableBashIntegration=true;
-  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
