@@ -7,11 +7,12 @@
 
     environment = {
       systemPackages = [
+        pkgs.exa
         pkgs.fd
-        pkgs.fzf
         pkgs.fish
+        pkgs.fzy
         pkgs.gcc
-        pkgs.gh
+        pkgs.gh # Required by sapling to use github.
         pkgs.git
         pkgs.gnumake
         pkgs.neovim
@@ -24,7 +25,5 @@
         pkgs.zoxide
       ];
     };
-
-    users.defaultUserShell = pkgs.fish;
   };
 }
