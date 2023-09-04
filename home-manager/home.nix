@@ -34,6 +34,8 @@
     '';
 
     ".config/fish/config.fish".source = dotfiles/fish/config.fish;
+
+    ".config/helix/config.toml".source = dotfiles/helix/config.toml;
     };
 
   # Let Home Manager install and manage itself.

@@ -11,6 +11,7 @@ environment.systemPackages = with pkgs; [
     gh
     git
     gnumake
+    helix
     kitty
     neovim
     ripgrep
