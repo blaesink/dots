@@ -2,3 +2,12 @@ theme = "bogster"
 
 [editor]
 line-number = "relative"
+true-color = true
+
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "╎"
+skip-levels = 0
+
+[keys.insert]
+j = { k = "normal_mode" }
