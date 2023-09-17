@@ -9,13 +9,18 @@
       xterm.enable = false;
     };
 
-    displayManager = {
-      defaultSession = "none+qtile";
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
     };
 
     windowManager.qtile = {
       enable = true;
     };
+  };
 
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
   };
 }

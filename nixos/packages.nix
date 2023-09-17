@@ -17,10 +17,12 @@ environment.systemPackages = with pkgs; [
     ripgrep
     sapling
     starship
+    waybar
     wezterm
+    wofi
     zlib
     zoxide
-  ];
+];
 
   programs.fish.enable = true;
 }
