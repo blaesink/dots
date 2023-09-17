@@ -20,6 +20,7 @@ environment.systemPackages = with pkgs; [
     waybar
     wezterm
     wofi
+    zellij
     zlib
     zoxide
 ];
