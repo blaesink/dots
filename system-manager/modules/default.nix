@@ -15,6 +15,7 @@
         pkgs.gh # Required by sapling to use github.
         pkgs.git
         pkgs.gnumake
+        pkgs.helix
         pkgs.neovim
         pkgs.openssh
         pkgs.ripgrep
@@ -23,6 +24,7 @@
         pkgs.starship
         pkgs.which
         pkgs.zoxide
+        pkgs.zellij
       ];
     };
   };
