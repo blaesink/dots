@@ -38,4 +38,7 @@
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
+
+  # Some projects use devenv, this is to automatically enable the shells.
+  programs.direnv.enable = true;
 }
