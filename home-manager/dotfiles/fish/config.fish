@@ -14,8 +14,13 @@ end
 set -gx EDITOR hx
 
 # Aliases
-alias ls="exa -l"
-alias la="exa -la"
+if type -q eza
+  alias ls="eza -l"
+  alias la="eza -la"
+else if type -q exa
+  alias ls="exa -l"
+  alias la="exa -la"
+end
 
 alias sls="sl status"
 alias sld="sl diff"

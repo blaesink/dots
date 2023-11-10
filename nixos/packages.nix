@@ -1,6 +1,7 @@
 { config, pkgs, inputs, lib, ...}:
 {
 environment.systemPackages = with pkgs; [
+    bat # Bat but better.
     brave
     btop
     fd
@@ -8,7 +9,7 @@ environment.systemPackages = with pkgs; [
     fzf
     fzy # fzf with "better default behavior"
     gcc13
-    gh
+    gh # For sapling
     git
     gnumake
     helix
@@ -17,6 +18,7 @@ environment.systemPackages = with pkgs; [
     ripgrep
     sapling
     starship
+    tealdeer
     waybar
     wezterm
     wofi

@@ -33,6 +33,7 @@
     ".config/fish/config.fish".source = dotfiles/fish/config.fish;
     ".config/helix/config.toml".source = dotfiles/helix/config.toml;
     ".config/qtile/config.py".source = dotfiles/qtile/config.py;
+    ".config/zellij/config.kdl".source = dotfiles/zellij/config.kdl;
     };
 
   # Let Home Manager install and manage itself.
