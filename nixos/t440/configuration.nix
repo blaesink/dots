@@ -36,6 +36,7 @@ in
   };
   
   environment.systemPackages = with pkgs; [
+    unstable.git-branchless
     unstable.jujutsu
     unstable.sapling
     unstable.eza # `exa` is unmaintained, but currently not in stable packages.
