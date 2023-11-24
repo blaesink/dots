@@ -72,6 +72,7 @@ in
     zoxide
     # Unstable packages.
     unstable.eza
+    unstable.git-branchless
     unstable.jujutsu
     unstable.sapling
     (import (fetchTarball https://install.devenv.sh/latest)).default # devenv from cachix
