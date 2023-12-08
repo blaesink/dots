@@ -17,9 +17,8 @@ in
   imports = [
     # include NixOS-WSL modules
     <nixos-wsl/modules>
-    # General packages
-    ../packages.nix
   ];
+  nix.settings.substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
 
   nix.settings.trusted-users = [ "root" "nixos" ]; # Allow for using `cachix use devenv`.
   
@@ -34,6 +33,7 @@ in
   };
  
   programs.direnv.enable = true;
+  programs.fish.enable = true;
  
 
   # This value determines the NixOS release from which the default
@@ -42,7 +42,7 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 
   nixpkgs.config = {
     packageOverrides = pkgs: {
@@ -53,7 +53,7 @@ in
   };
   
   environment.systemPackages = with pkgs; [
-    bat # Bat but better.
+    bat # Cat but better.
     fd
     fish
     fzy # fzf with "better default behavior"
@@ -62,19 +62,17 @@ in
     git
     gnumake
     helix
-    kitty
     neovim
     ripgrep
     starship
     tealdeer
+    ugrep
     zellij
     zlib
     zoxide
     # Unstable packages.
     unstable.eza
     unstable.git-branchless
-    unstable.jujutsu
-    unstable.sapling
     (import (fetchTarball https://install.devenv.sh/latest)).default # devenv from cachix
   ];
 }
