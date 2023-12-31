@@ -25,7 +25,7 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   nixpkgs.config = {
     packageOverrides = pkgs: {
@@ -36,9 +36,13 @@ in
   };
   
   environment.systemPackages = with pkgs; [
-    unstable.git-branchless
-    unstable.jujutsu
+    brave
+    waybar
+    wofi
     unstable.eza # `exa` is unmaintained, but currently not in stable packages.
+    unstable.git-branchless
+    unstable.ugrep
+    unstable.wezterm
   ];
 
   networking.hostName = "nixos"; # Define your hostname.

@@ -22,8 +22,7 @@ else if type -q exa
   alias la="exa -la"
 end
 
-alias sls="sl status"
-alias sld="sl diff"
+alias sl="git sl"
 alias zi="__zoxide_zi"
 alias z="__zoxide_z"
 alias ff="clear && fd -t f | fzy | xargs -I _ $EDITOR _"

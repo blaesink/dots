@@ -1,27 +1,19 @@
 { config, pkgs, inputs, lib, ...}:
 {
 environment.systemPackages = with pkgs; [
-    bat # Bat but better.
-    brave
+    bat # `cat` but better.
     btop
     fd
     fish
-    fzf
-    fzy # fzf with "better default behavior"
+    fzy # fzf with "better default behavior".
     gcc13
-    gh # For sapling
+    gh # Easier github login.
     git
     gnumake
     helix
-    kitty
-    neovim
     ripgrep
-    sapling
     starship
     tealdeer
-    waybar
-    wezterm
-    wofi
     zellij
     zlib
     zoxide

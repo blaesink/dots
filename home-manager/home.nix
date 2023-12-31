@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "nixos";
-  home.homeDirectory = "/home/nixos/";
+  home.username = "lich";
+  home.homeDirectory = "/home/lich/";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -35,6 +35,7 @@
     ".config/helix/config.toml".source = dotfiles/helix/config.toml;
     ".config/qtile/config.py".source = dotfiles/qtile/config.py;
     ".config/zellij/config.kdl".source = dotfiles/zellij/config.kdl;
+    "/.config/hypr/hyprland.conf".source = dotfiles/hyprland/hyprland.conf;
     };
 
   # Let Home Manager install and manage itself.
