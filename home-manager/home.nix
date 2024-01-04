@@ -33,6 +33,7 @@
 
     ".config/fish/config.fish".source = dotfiles/fish/config.fish;
     ".config/helix/config.toml".source = dotfiles/helix/config.toml;
+    ".config/helix/languages.toml".source = dotfiles/helix/languages.toml;
     ".config/qtile/config.py".source = dotfiles/qtile/config.py;
     ".config/zellij/config.kdl".source = dotfiles/zellij/config.kdl;
     "/.config/hypr/hyprland.conf".source = dotfiles/hyprland/hyprland.conf;

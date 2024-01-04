@@ -1,4 +1,4 @@
-theme = "bogster"
+theme = "github_dark_high_contrast"
 
 [editor]
 line-number = "relative"
