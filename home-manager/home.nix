@@ -36,6 +36,7 @@
     ".config/qtile/config.py".source = dotfiles/qtile/config.py;
     ".config/zellij/config.kdl".source = dotfiles/zellij/config.kdl;
     "/.config/hypr/hyprland.conf".source = dotfiles/hyprland/hyprland.conf;
+    ".wezterm.lua".source = dotfiles/wezterm/wezterm.lua;
     };
 
   # Let Home Manager install and manage itself.

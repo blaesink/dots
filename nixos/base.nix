@@ -36,7 +36,7 @@
 
   # Fonts
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "IBMPlexMono"]; })
   ];
 
   # Some projects use devenv, this is to automatically enable the shells.
