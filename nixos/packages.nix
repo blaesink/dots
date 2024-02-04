@@ -16,6 +16,7 @@ environment.systemPackages = with pkgs; [
     ripgrep
     starship
     tealdeer
+    ugrep
     zellij
     zlib
     zoxide
