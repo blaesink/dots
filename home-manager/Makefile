@@ -1,4 +1,4 @@
-CONFIG_FILE := ./home.nix
+CONFIG_FILE := ./${USER}.nix
 
 .PHONY: switch
 switch:
