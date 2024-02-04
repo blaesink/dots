@@ -1,14 +1,16 @@
-{ config, pkgs, inputs, lib, ...}:
+{ pkgs, ... }:
 {
 environment.systemPackages = with pkgs; [
     bat # `cat` but better.
     btop
+    delta # better `diff`
     fd
     fish
     fzy # fzf with "better default behavior".
     gcc13
     gh # Easier github login.
     git
+    git-branchless
     gnumake
     helix
     ripgrep

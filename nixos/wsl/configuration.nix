@@ -11,7 +11,8 @@ let
   unstableTarball = 
     fetchTarball
       https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
-
+  packages = (import ../packages.nix) { inherit pkgs; };
+  systemPackages = packages.environment.systemPackages;
 in
 {
   imports = [
@@ -53,26 +54,7 @@ in
   };
   
   environment.systemPackages = with pkgs; [
-    bat # Cat but better.
-    fd
-    fish
-    fzy # fzf with "better default behavior"
-    gcc13
-    gh # For sapling
-    git
-    gnumake
-    helix
-    neovim
-    ripgrep
-    starship
-    tealdeer
-    ugrep
-    zellij
-    zlib
-    zoxide
-    # Unstable packages.
     unstable.eza
-    unstable.git-branchless
-    (import (fetchTarball https://install.devenv.sh/latest)).default # devenv from cachix
-  ];
+    (import (fetchTarball https://install.devenv.sh/latest)).default # devenv from cachix    
+  ] ++ systemPackages;
 }

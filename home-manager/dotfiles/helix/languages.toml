@@ -1,13 +1,3 @@
-[language-server.pyright]
-command = "pyright-langserver"
-args = ["--stdio"]
-
-[language-server.ruff-lsp]
-command = "ruff-lsp"
-
-[language-server.ruff-lsp.config]
-settings = {args = ["format", "-"]}
-
 [[language]]
 name = "python"
 scope ="source.python"
@@ -17,3 +7,17 @@ indent = { tab-width = 4, unit = "    " }
 roots = ["pyproject.toml", "pyrightconfig.json", "Poetry.lock"]
 language-servers = [ { name = "pyright" }, { name = "ruff-lsp" } ]
 shebangs = [ "python" ]
+
+[language-server.ruff-lsp]
+command = "ruff-lsp"
+
+[language-server.ruff-lsp.config]
+settings = {args = ["format", "-"]}
+
+[language-server.ruff]
+command = "ruff-lsp"
+config = { settings = { run = "onSave" } }
+
+[language.formatter]
+command = "ruff"
+args = ["format", "-"]
