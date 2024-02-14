@@ -4,6 +4,7 @@ environment.systemPackages = with pkgs; [
     bat # `cat` but better.
     btop
     delta # better `diff`
+    erdtree # better `tree`
     fd
     fish
     fzy # fzf with "better default behavior".
@@ -13,6 +14,7 @@ environment.systemPackages = with pkgs; [
     git-branchless
     gnumake
     helix
+    procs # Better `ps`.
     ripgrep
     starship
     tealdeer
