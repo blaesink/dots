@@ -22,7 +22,10 @@ else if type -q exa
   alias la="exa -la"
 end
 
-alias sl="git sl"
+alias gl="git sl"
+alias gs="git status"
+alias gd="git diff"
+alias gsh="git show"
 alias zi="__zoxide_zi"
 alias z="__zoxide_z"
 alias ff="clear && fd -t f | fzy | xargs -I _ $EDITOR _"
