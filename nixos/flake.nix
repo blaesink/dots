@@ -1,25 +1,40 @@
 {
-  description = "A very basic flake";
+  description = "Personal nixOS setup for various machines.";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixos-wsl.url = "github:nix-community/nixos-wsl";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, ... }: 
     let
       system = "x86_64-linux";
       lib = inputs.nixpkgs.lib;
-      pkgs = (import nixpkgs) { inherit system; };
       unstable = import inputs.nixpkgs-unstable { inherit system; };
-      # packages = (import ./packages.nix) { inherit pkgs unstable; };
     in rec {
       nixosConfigurations = {
-        # NOTE: Right now this uses --impure to get around the <nixos-wsl/modules>        
         wsl = lib.nixosSystem {
           inherit system;
-          modules = [ ./wsl/configuration.nix ];
+          modules = [ 
+            ./wsl/configuration.nix
+            inputs.nixos-wsl.nixosModules.wsl
+          ];
           specialArgs = { inherit inputs unstable; };
+        };
+        kiwano = lib.nixosSystem {
+          inherit system;
+          modules = [ 
+            inputs.disko.nixosModules.disko
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p53
+            ./kiwano/configuration.nix
+          ];
+          specialArgs = { inherit inputs; };
         };
       };
     };

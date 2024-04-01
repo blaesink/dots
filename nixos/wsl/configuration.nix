@@ -10,10 +10,6 @@ let
   packages = import (../packages.nix) { inherit pkgs unstable; };
   systemPackages = packages.environment.systemPackages;
 in {
-  imports = [
-    # include NixOS-WSL modules
-    <nixos-wsl/modules>
-  ];
   nix.settings = {
     substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
     trusted-users = [ "root" "nixos" ]; # Allow for using `cachix use devenv`.

@@ -27,6 +27,15 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11";
 
+  # Fonts
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "IBMPlexMono"]; })
+  ];
+
+  # Some projects use devenv, this is to automatically enable the shells.
+  programs.direnv.enable = true;
+
+
   nixpkgs.config = {
     packageOverrides = pkgs: {
       unstable = import unstableTarball {
