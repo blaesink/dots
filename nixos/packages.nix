@@ -13,7 +13,7 @@
       git
       git-branchless
       gnumake
-      helix
+      unstable.helix
       procs # Better `ps`.
       ripgrep
       starship
