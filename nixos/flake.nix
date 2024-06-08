@@ -3,8 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
+    nixpkgs-latest.url = "github:nixos/nixpkgs?ref=nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixos-wsl.url = "github:nix-community/nixos-wsl";
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl/main";
+      inputs.nixpkgs.follows = "nixpkgs-latest";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     disko = {
       url = "github:nix-community/disko";
@@ -12,20 +16,30 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, ... }: 
+  outputs = inputs@{
+    self,
+    nixpkgs,
+    nixos-wsl,
+    nixpkgs-latest,
+    nixpkgs-unstable,
+    ...
+  }: 
     let
       system = "x86_64-linux";
       lib = inputs.nixpkgs.lib;
       unstable = import inputs.nixpkgs-unstable { inherit system; };
+      nixpkgs-latest = import inputs.nixpkgs-latest { inherit system; };
     in rec {
       nixosConfigurations = {
-        wsl = lib.nixosSystem {
+        wsl = inputs.nixpkgs-latest.lib.nixosSystem {
           inherit system;
           modules = [ 
             ./wsl/configuration.nix
-            inputs.nixos-wsl.nixosModules.wsl
+            nixos-wsl.nixosModules.default
           ];
-          specialArgs = { inherit inputs unstable; };
+          specialArgs = {
+            inherit unstable nixpkgs-latest system; 
+          };
         };
         kiwano = lib.nixosSystem {
           inherit system;

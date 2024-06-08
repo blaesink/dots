@@ -5,8 +5,15 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ config, lib, pkgs, unstable, ... }: 
+{ 
+  config,
+  lib,
+  nixpkgs-latest,
+  unstable,
+  ...
+}: 
 let
+  pkgs = nixpkgs-latest;
   packages = import (../packages.nix) { inherit pkgs unstable; };
   systemPackages = packages.environment.systemPackages;
 in {
@@ -29,6 +36,7 @@ in {
   programs.direnv.enable = true;
   programs.fish.enable = true;
  
+  # Don't change this!!
   system.stateVersion = "23.11"; # Did you read the comment?
 
   environment.systemPackages = systemPackages;

@@ -1,0 +1,5 @@
+switch target *args:
+    nixos-rebuild --flake .#{{target}} switch {{args}}
+
+check:
+    nix flake check
