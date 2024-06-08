@@ -7,6 +7,7 @@
       unstable.eza
       fd
       fish
+      fishPlugins.hydro
       fzy # fzf with "better default behavior".
       gcc13
       gh # Easier github login.
