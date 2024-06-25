@@ -32,6 +32,12 @@ in {
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
   };
+
+
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
  
   programs.direnv.enable = true;
   programs.fish.enable = true;

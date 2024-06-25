@@ -14,6 +14,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs = inputs@{
@@ -22,6 +23,7 @@
     nixos-wsl,
     nixpkgs-latest,
     nixpkgs-unstable,
+    agenix,
     ...
   }: 
     let
@@ -44,11 +46,15 @@
         kiwano = lib.nixosSystem {
           inherit system;
           modules = [ 
+            ./kiwano/configuration.nix
             inputs.disko.nixosModules.disko
             inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p53
-            ./kiwano/configuration.nix
+            agenix.nixosModules.default
           ];
-          specialArgs = { inherit inputs; };
+          specialArgs = { 
+            inherit inputs;
+            inherit (inputs) agenix;
+          };
         };
       };
     };

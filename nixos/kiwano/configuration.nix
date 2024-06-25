@@ -6,7 +6,7 @@
 # GPU:     NVIDIA Quadro T1000 Mobile
 # =============
 
-{ config, lib, pkgs, unstable, modulesPath, ... }: 
+{ config, lib, pkgs, unstable, modulesPath, agenix, ... }: 
 let
   commonUserArgs = {
     openssh.authorizedKeys.keys = [
@@ -20,9 +20,33 @@ in {
     ./disk-config.nix # For use in nixos-anywhere initial provisioning.
     ./hardware-configuration.nix
     ./samba.nix # Enable SMB sharing.
+    ./cf_tunnel.nix
   ];
   system.stateVersion = "23.11"; # Don't change this!
   networking.hostName = "kiwano";
+
+  networking.firewall = {
+    enable = true;
+    allowPing = true;
+    allowedTCPPorts = [ 7844 ];
+    allowedUDPPorts = [ 7844 ];
+    extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
+  };
+
+  # Don't need here. Just set manually.
+  networking.networkmanager.enable = false;
+  networking.useDHCP = true;
+  networking.interfaces.enp0s31f6.ipv4.addresses = [{
+    address = "192.168.1.32";
+    prefixLength = 24;
+  }];
+
+  age = {
+    secrets.cf_tun_tok.file = ../secrets/cloudflare_tunnel_token.age;
+    identityPaths = [ "/root/.ssh/localKey" ];
+  };
+
+  virtualisation.docker.enable = true;
 
   boot.loader.grub = {
     efiSupport = true;
@@ -48,6 +72,13 @@ in {
     root = {};
   };
 
+  programs.ssh = {
+    startAgent = true;
+    extraConfig = ''
+      AddKeysToAgent yes
+    '';
+  };
+
   # === begin enable NVIDIA GPU ===
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
@@ -71,9 +102,11 @@ in {
   # === end enable NVIDIA GPU ===
 
   # Don't suspend because the lid is closed.
-  services.logind.lidSwitch = "ignore";
-  services.logind.lidSwitchDocked = "ignore";
-  services.logind.lidSwitchExternalPower = "ignore";
+  services.logind = {
+    lidSwitch = "ignore";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "ignore";
+  };
 
   services.tlp.settings = {
     # Keep battery from being fully charged to prolong its lifespan.
@@ -85,5 +118,5 @@ in {
     git
     pciutils
     lm_sensors
-  ];
+  ] ++ [ agenix.packages.x86_64-linux.default ];
 }
