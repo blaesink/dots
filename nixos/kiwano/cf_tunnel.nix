@@ -4,7 +4,7 @@ let
     set -euo pipefail
     cf_token=$(cat ${config.age.secrets.cf_tun_tok.path})
     ${pkgs.docker}/bin/docker pull cloudflare/cloudflared:1548-628176a2d64c
-    ${pkgs.docker}/bin/docker run cloudflare/cloudflared:latest tunnel \
+    ${pkgs.docker}/bin/docker run cloudflare/cloudflared:1548-628176a2d64c tunnel \
     --no-autoupdate run \
     --token $cf_token 
   '';
