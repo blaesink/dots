@@ -28,7 +28,8 @@ alias gd="git diff"
 alias gsh="git show"
 alias zi="__zoxide_zi"
 alias z="__zoxide_z"
-alias ff="clear && fd -t f | fzy | xargs -I _ $EDITOR _"
+# alias ff="clear && fd -t f | fzy | xargs -I _ $EDITOR _"
+alias ff="hx (fd -t f | sk -m)"
 alias zj="zellij"
 
 if test -z (pgrep ssh-agent)

@@ -45,5 +45,5 @@ in {
   # Don't change this!!
   system.stateVersion = "23.11"; # Did you read the comment?
 
-  environment.systemPackages = systemPackages;
+  environment.systemPackages = systemPackages ++ [ unstable.skim ];
 }

@@ -21,3 +21,14 @@ config = { settings = { run = "onSave" } }
 [language.formatter]
 command = "ruff"
 args = ["format", "-"]
+
+[language-server.rust-analyzer.config]
+check.command = "clippy"
+
+[[language]]
+name = "ocaml"
+auto-format = true
+
+[language.formatter]
+command = "ocamlformat"
+args = [ "-" ]
