@@ -46,6 +46,7 @@ end
 alias gfs git-fuzzy-switch
 
 zoxide init fish | source
+jj util completion fish | source
 
 if type -q starship
     eval (starship init fish)

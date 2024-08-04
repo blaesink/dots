@@ -1,0 +1,4 @@
+default: (switch "./${USER}.nix")
+
+switch config_file:
+    @nix run home-manager/release-24.05 -- -f {{config_file}} switch
