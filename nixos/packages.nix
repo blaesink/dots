@@ -22,6 +22,7 @@
       ugrep
       unstable.eza
       unstable.helix
+      watchexec
       zellij
       zlib
       zoxide

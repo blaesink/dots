@@ -28,7 +28,6 @@ alias gd="git diff"
 alias gsh="git show"
 alias zi="__zoxide_zi"
 alias z="__zoxide_z"
-# alias ff="clear && fd -t f | fzy | xargs -I _ $EDITOR _"
 alias ff="hx (fd -t f | sk -m)"
 alias zj="zellij"
 
@@ -41,6 +40,11 @@ end
 
 function git-fuzzy-switch
     git switch (git for-each-ref --format='%(refname:short)' refs/heads | fzy)
+end
+
+# Switch into a directory in my code projects.
+function repo
+    cd (fd --base-directory ~/prj -t d -d 1 -a | sk)
 end
 
 alias gfs git-fuzzy-switch
