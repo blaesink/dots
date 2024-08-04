@@ -21,6 +21,7 @@ in {
     ./hardware-configuration.nix
     ./samba.nix # Enable SMB sharing.
     ./cf_tunnel.nix
+    ./caddy.nix
   ];
   system.stateVersion = "23.11"; # Don't change this!
   networking.hostName = "kiwano";
@@ -43,6 +44,7 @@ in {
 
   age = {
     secrets.cf_tun_tok.file = ../secrets/cloudflare_tunnel_token.age;
+    secrets.cf_token.file = ../secrets/cloudflare_token.age;
     identityPaths = [ "/root/.ssh/localKey" ];
   };
 
