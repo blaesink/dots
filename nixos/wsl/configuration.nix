@@ -34,13 +34,16 @@ in {
   };
 
 
-  virtualisation.docker.rootless = {
+  virtualisation.docker = {
     enable = true;
-    setSocketVariable = true;
   };
  
-  programs.direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    silent = true;
+  };
   programs.fish.enable = true;
+  programs.mosh.enable = true;
  
   # Don't change this!!
   system.stateVersion = "23.11"; # Did you read the comment?
