@@ -22,7 +22,7 @@
       ugrep
       unstable.eza
       unstable.helix
-      # unstable.skim 
+      unstable.skim 
       watchexec
       zellij
       zlib
