@@ -13,7 +13,7 @@
       git
       git-branchless
       gnumake
-      jujutsu
+      unstable.jujutsu
       just
       procs   # Better `ps`.
       ripgrep

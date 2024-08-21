@@ -82,3 +82,5 @@ jj util completion fish | source
 if type -q starship
     eval (starship init fish)
 end
+
+direnv hook fish | source

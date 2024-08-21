@@ -1,3 +1,7 @@
 keybinds {
     unbind "Ctrl o" // unbind in all modes
+
+    normal {
+        bind "Ctrl k" { SwitchToMode "session"; }
+    }
 }

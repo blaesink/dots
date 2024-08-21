@@ -29,8 +29,8 @@
     let
       system = "x86_64-linux";
       lib = inputs.nixpkgs.lib;
-      unstable = import inputs.nixpkgs-unstable { inherit system; };
-      nixpkgs-latest = import inputs.nixpkgs-latest { inherit system; config.allowUnfree=true; };
+      unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true;};
+      nixpkgs-latest = import inputs.nixpkgs-latest { inherit system; config.allowUnfree = true; };
     in rec {
       nixosConfigurations = {
         wsl = inputs.nixpkgs-latest.lib.nixosSystem {
@@ -56,11 +56,11 @@
             inherit (inputs) agenix;
           };
         };
-        jackfruit = lib.nixosSystem {
+        jackfruit = inputs.nixpkgs-latest.lib.nixosSystem {
           inherit system;
           modules = [ ./jackfruit/configuration.nix ];
           specialArgs = {
-            inherit inputs nixpkgs-latest unstable system; 
+            inherit nixpkgs-latest unstable system; 
           };
         };
       };

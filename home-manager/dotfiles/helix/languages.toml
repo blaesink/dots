@@ -1,3 +1,10 @@
+[language-server.basedpyright]
+command = "basedpyright-langserver"
+args = ["--stdio"]
+
+[language-server.gpt]
+command = "helix-gpt"
+
 [[language]]
 name = "python"
 scope ="source.python"
@@ -5,7 +12,7 @@ auto-format = true
 injection-regex = "python"
 indent = { tab-width = 4, unit = "    " }
 roots = ["pyproject.toml", "pyrightconfig.json", "Poetry.lock"]
-language-servers = [ { name = "pyright" }, { name = "ruff-lsp" } ]
+language-servers = [ { name = "basedpyright" }, { name = "ruff-lsp" }, {name = "gpt"}]
 shebangs = [ "python" ]
 
 [language-server.ruff-lsp]
