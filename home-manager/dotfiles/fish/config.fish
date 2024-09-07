@@ -28,8 +28,8 @@ alias gd="git diff"
 alias gsh="git show"
 alias zi="__zoxide_zi"
 alias z="__zoxide_z"
-alias ff="hx (fd -t f | sk -m)"
 alias zj="zellij"
+alias new="exec fish"
 
 if test -z (pgrep ssh-agent)
     eval (ssh-agent -c) >/dev/null
@@ -44,9 +44,36 @@ end
 
 # Switch into a directory in my code projects.
 function repo
-    cd (fd --base-directory ~/prj -t d -d 1 -a | sk)
+    set -l r (fd --base-directory ~/prj -t d -d 1 -a | sk)
+    if test -n "$r"
+        cd $r
+    end
 end
 
+# Find a file in the directory tree and edit it.
+# Accepts a positional arg for an extension to look for.
+function findedit
+    if test -n "$argv[1]"
+        set -f file (fd -t f -a -e $argv[1] | sk | awk -F ":" '{print $1}')
+    else
+        set -f file (fd -t f -a | sk | awk -F ":" '{print $1}')
+    end
+
+    if test -n "$file"
+        $EDITOR $file
+    end
+end
+
+alias ff="findedit"
+
+function zellij-select
+    set session ( zj ls -n | awk -F " " '{print $1}' | sk )
+    if test -n "$session"
+        zellij a $session
+    end
+end
+
+alias zjs zellij-select
 alias gfs git-fuzzy-switch
 
 zoxide init fish | source

@@ -1,0 +1,6 @@
+AddKeysToAgent yes
+
+Host jackfruit
+	HostName 192.168.1.45
+	User kevin
+	IdentityFile ~/.ssh/localKey
