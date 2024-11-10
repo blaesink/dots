@@ -39,15 +39,11 @@ in {
   ];
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout  = "us";
-    variant = "";
-  };
-
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-    package = unstable.ollama;
+  services = {
+    xserver.xkb = {
+      layout  = "us";
+      variant = "";
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
