@@ -45,9 +45,7 @@ end
 # Switch into a directory in my code projects.
 function repo
     set -l r (fd --base-directory ~/prj -t d -d 1 -a | sk)
-    if test -n "$r"
-        cd $r
-    end
+    and cd $r
 end
 
 # Find a file in the directory tree and edit it.
@@ -68,9 +66,7 @@ alias ff="findedit"
 
 function zellij-select
     set session ( zj ls -n | awk -F " " '{print $1}' | sk )
-    if test -n "$session"
-        zellij a $session
-    end
+    and zellij a $session
 end
 
 alias zjs zellij-select
