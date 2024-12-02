@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
-    nixpkgs-latest.url = "github:nixos/nixpkgs?ref=nixos-24.05";
+    nixpkgs-latest.url = "github:nixos/nixpkgs?ref=nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl/main";
@@ -12,7 +12,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-latest";
     };
     agenix.url = "github:ryantm/agenix";
   };
@@ -43,19 +43,19 @@
             inherit unstable nixpkgs-latest system; 
           };
         };
-        kiwano = lib.nixosSystem {
-          inherit system;
-          modules = [ 
-            ./kiwano/configuration.nix
-            inputs.disko.nixosModules.disko
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p53
-            agenix.nixosModules.default
-          ];
-          specialArgs = { 
-            inherit inputs;
-            inherit (inputs) agenix;
-          };
-        };
+        # kiwano = inputs.nixpkgs-latest.lib.nixosSystem {
+        #   inherit system;
+        #   modules = [ 
+        #     ./kiwano/configuration.nix
+        #     inputs.disko.nixosModules.disko
+        #     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p53
+        #     agenix.nixosModules.default
+        #   ];
+        #   specialArgs = { 
+        #     inherit inputs;
+        #     inherit (inputs) agenix;
+        #   };
+        # };
         jackfruit = inputs.nixpkgs-latest.lib.nixosSystem {
           inherit system;
           modules = [ ./jackfruit/configuration.nix ];

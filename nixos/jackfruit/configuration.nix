@@ -12,8 +12,6 @@
 }: 
 let
   pkgs = nixpkgs-latest;
-  packages = import (../packages.nix) { inherit pkgs unstable; };
-  systemPackages = packages.environment.systemPackages;
 in {
   nix.settings.trusted-users = ["root" "kevin"];
   nixpkgs.config.allowUnfree = true;
@@ -33,9 +31,9 @@ in {
 
   imports = [
     ../base.nix
+    ../packages.nix
     ./hardware-configuration.nix
     ./kube.nix
-    # ./ports.nix
   ];
 
   # Configure keymap in X11
@@ -58,9 +56,10 @@ in {
     shell = pkgs.fish;
   };
 
-  environment.systemPackages = systemPackages ++ [
+  environment.systemPackages = [
     pkgs.cudaPackages.cudatoolkit
     pkgs.cudaPackages.cudnn
+    pkgs.kind
     pkgs.kubernetes-helm # "helm" in the pkgs repo is an audio synthesizer
     pkgs.mkl
 
