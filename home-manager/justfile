@@ -1,7 +1,7 @@
 default: (switch "./${USER}.nix")
 
 switch config_file:
-    @nix run home-manager/release-24.05 -- -f {{config_file}} switch
+    @nix run home-manager/release-24.11 -- -b backup -f {{config_file}} switch
 
 install-kube:
     @./scripts/install-kube.sh

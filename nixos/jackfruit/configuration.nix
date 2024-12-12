@@ -15,18 +15,18 @@ let
 in {
   nix.settings.trusted-users = ["root" "kevin"];
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
-    "cuda_cuobjdump"
-    "cuda_gdb"
-    "cuda_nvcc"
-    "cuda-merged"
-    "cudaPackages.cudatoolkit"
-    "cudaPackages.cudnn"
-    "mkl"
-    "nvidia-persistenced"
-    "nvidia-settings"
-    "nvidia-x11"
-  ];
+  # nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+  #   "cuda_cuobjdump"
+  #   "cuda_gdb"
+  #   "cuda_nvcc"
+  #   "cuda-merged"
+  #   "cudaPackages.cudatoolkit"
+  #   "cudaPackages.cudnn"
+  #   "mkl"
+  #   "nvidia-persistenced"
+  #   "nvidia-settings"
+  #   "nvidia-x11"
+  # ];
 
 
   imports = [
@@ -75,6 +75,10 @@ in {
     pkgs.pyright
     pkgs.ruff-lsp
     unstable.smartcat
+    unstable.k9s
+    unstable.teleport
+    unstable.ghq     # Does a git clone of stuff into a predetermined place
+
   ];
 
   # Gotta have my flakes.

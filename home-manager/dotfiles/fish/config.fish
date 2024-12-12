@@ -1,3 +1,5 @@
+source ~/.config/fish/k8s.fish
+
 set fish_greeting
 
 fish_add_path ~/.local/bin
@@ -12,6 +14,7 @@ if type -q lvim
 end
 
 set -gx EDITOR hx
+set -gx GHQ_ROOT $HOME/prj
 
 # Aliases
 if type -q eza
@@ -22,6 +25,7 @@ else if type -q exa
     alias la="exa -la"
 end
 
+alias cat="bat"
 alias gl="git sl"
 alias gs="git status"
 alias gd="git diff"
@@ -71,6 +75,15 @@ end
 
 alias zjs zellij-select
 alias gfs git-fuzzy-switch
+
+
+# Mimic Bash's !!
+function last_history_item
+    echo $history[1]
+end
+abbr -a !! --position anywhere --function last_history_item
+
+abbr -a kk kubectl
 
 zoxide init fish | source
 jj util completion fish | source
