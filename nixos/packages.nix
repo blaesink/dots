@@ -9,17 +9,15 @@
       fishPlugins.hydro
       fzy     # fzf with "better default behavior".
       gcc13
-      gh      # Easier github login.
       git
-      git-branchless
       gnumake
       unstable.jujutsu
       just
       procs   # Better `ps`.
       ripgrep
+      repgrep # interactive search + replace powered by ripgrep
       starship
       tealdeer
-      ugrep
       unstable.eza
       unstable.helix
       unstable.skim 
