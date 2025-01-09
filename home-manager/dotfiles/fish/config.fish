@@ -83,7 +83,7 @@ function last_history_item
 end
 abbr -a !! --position anywhere --function last_history_item
 
-abbr -a kk kubectl
+abbr -a kc kubectl
 
 zoxide init fish | source
 jj util completion fish | source
