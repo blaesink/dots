@@ -1,4 +1,10 @@
-{ pkgs, unstable, ... }: {
+{ pkgs, unstable, ... }:
+let
+  fishplugins = with pkgs.fishPlugins; [
+    hydro
+    sponge
+  ];
+in {
   environment.systemPackages = with pkgs; [
       bat     # `cat` but better.
       btop
@@ -6,7 +12,6 @@
       erdtree # better `tree`
       fd
       fish
-      fishPlugins.hydro
       fzy     # fzf with "better default behavior".
       gcc13
       git
@@ -25,5 +30,5 @@
       zellij
       zlib
       zoxide
-  ];
+  ] ++ fishplugins;
 }
