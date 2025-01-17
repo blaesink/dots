@@ -77,8 +77,8 @@ in {
     unstable.smartcat
     unstable.k9s
     unstable.teleport
+    unstable.television
     unstable.ghq     # Does a git clone of stuff into a predetermined place
-
   ];
 
   # Gotta have my flakes.
