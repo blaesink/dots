@@ -15,19 +15,6 @@ let
 in {
   nix.settings.trusted-users = ["root" "kevin"];
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
-  #   "cuda_cuobjdump"
-  #   "cuda_gdb"
-  #   "cuda_nvcc"
-  #   "cuda-merged"
-  #   "cudaPackages.cudatoolkit"
-  #   "cudaPackages.cudnn"
-  #   "mkl"
-  #   "nvidia-persistenced"
-  #   "nvidia-settings"
-  #   "nvidia-x11"
-  # ];
-
 
   imports = [
     ../base.nix
@@ -59,26 +46,19 @@ in {
   environment.systemPackages = [
     pkgs.cudaPackages.cudatoolkit
     pkgs.cudaPackages.cudnn
-    pkgs.kind
-    pkgs.kubernetes-helm # "helm" in the pkgs repo is an audio synthesizer
     pkgs.mkl
 
-    pkgs.docker-compose
-
-    # Using docker here is a workaround.
-    # It will install nvidia-container-runtime and that will cause it to be accessible via /run/current-system/sw/bin/nvidia-container-runtime.
-    # Currently its not directly accessible in nixpkgs.
-
-    # pkgs.docker
-
     # Dev tools I just don't want to keep installing in a flake right now:
+    unstable.coder
+    pkgs.jq
     pkgs.pyright
     pkgs.ruff-lsp
-    unstable.smartcat
+    unstable.ghq     # Does a git clone of stuff into a predetermined place
     unstable.k9s
+    unstable.nixd
+    unstable.smartcat
     unstable.teleport
     unstable.television
-    unstable.ghq     # Does a git clone of stuff into a predetermined place
   ];
 
   # Gotta have my flakes.
@@ -116,24 +96,10 @@ in {
     package                = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # For GPU passthrough to containers.
-  hardware.nvidia-container-toolkit.enable = true;
-
-  # ==== Virtualization ====
-
-  # Enable podman. Common container config files in /etc/containers
-  virtualisation.containers.enable = true;
-  virtualisation.docker= {
-    enable = true;
-    enableNvidia = true;
-  };
-
-
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
       6379 # ray
-      6443 # k3s
     ];
     allowedUDPPorts = [ 6379 ];
   };
