@@ -28,10 +28,7 @@
           runtime_type = "io.containerd.runc.v2";
           fullCNIPlugins = pkgs.buildEnv {
             name = "full-cni";
-            paths = with pkgs; [
-              cni-plugins
-              cni-plugin-flannel
-            ];
+            paths = with pkgs; [ cni-plugins cni-plugin-flannel ];
           };
         in
         {

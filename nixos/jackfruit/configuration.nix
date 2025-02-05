@@ -5,7 +5,6 @@
 
 { 
   config,
-  lib,
   nixpkgs-latest,
   unstable,
   ...
@@ -35,7 +34,7 @@ in {
   users.users.kevin = {
     isNormalUser = true;
     description  = "Kevin";
-    extraGroups  = [ "networkmanager" "wheel" "docker" "podman" ];
+    extraGroups  = [ "networkmanager" "wheel" "docker" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDqd3hnGqK9vb/GPW4kOLr1glLw83wIO5M0nGQlvSqVU Kevin Blaesing <kevin.blaesing@gmail.com>"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJv5IcxMlG6lbMdrbypSMQ6lvK/60icQ4TS3ivtuaFUJ"
@@ -69,10 +68,10 @@ in {
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.direnv.enable = true;
-  programs.fish.enable = true;
-  programs.mtr.enable = true;
+  programs.fish.enable   = true;
+  programs.mtr.enable    = true;
   programs.nix-ld.enable = true;
-  programs.mosh.enable = true;
+  programs.mosh.enable   = true;
 
   programs.gnupg.agent = {
     enable           = true;
@@ -86,8 +85,10 @@ in {
   # ==== Hardware Options ====
 
   # Set up nvidia drivers etc.
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport32Bit = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     powerManagement.enable = false;

@@ -18,20 +18,15 @@
   };
 
   outputs = inputs@{
-    self,
-    nixpkgs,
     nixos-wsl,
-    nixpkgs-latest,
-    nixpkgs-unstable,
-    agenix,
+    # agenix,
     ...
   }: 
     let
       system = "x86_64-linux";
-      lib = inputs.nixpkgs.lib;
       unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true;};
       nixpkgs-latest = import inputs.nixpkgs-latest { inherit system; config.allowUnfree = true; };
-    in rec {
+    in {
       nixosConfigurations = {
         wsl = inputs.nixpkgs-latest.lib.nixosSystem {
           inherit system;
