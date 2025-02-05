@@ -41,6 +41,7 @@
           ];
           specialArgs = {
             inherit unstable nixpkgs-latest system; 
+            packagesType="withFish";
           };
         };
         # kiwano = inputs.nixpkgs-latest.lib.nixosSystem {
@@ -61,6 +62,7 @@
           modules = [ ./jackfruit/configuration.nix ];
           specialArgs = {
             inherit nixpkgs-latest unstable system; 
+            packagesType="withFish";
           };
         };
       };

@@ -6,15 +6,13 @@
 # https://github.com/nix-community/NixOS-WSL
 
 { 
-  config,
-  lib,
   nixpkgs-latest,
   unstable,
   ...
 }: 
 let
   pkgs = nixpkgs-latest;
-  packages = import (../packages.nix) { inherit pkgs unstable; };
+  packages = import ../packages.nix { inherit pkgs unstable; };
   systemPackages = packages.environment.systemPackages;
 in {
   nix.settings = {

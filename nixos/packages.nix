@@ -1,11 +1,16 @@
-{ pkgs, unstable, ... }:
+{ pkgs, unstable, packagesType ? "", ... }:
 let
-  fishplugins = with pkgs.fishPlugins; [
+  fishPlugins = with pkgs.fishPlugins; [
     hydro
     sponge
   ];
-in {
-  environment.systemPackages = with pkgs; [
+  unstablePackages = with unstable; [
+      jujutsu
+      eza
+      helix
+      skim 
+  ];
+  stablePackages = with pkgs; [
       bat     # `cat` but better.
       btop
       delta   # better `diff`
@@ -16,19 +21,20 @@ in {
       gcc13
       git
       gnumake
-      unstable.jujutsu
       just
       procs   # Better `ps`.
       ripgrep
       repgrep # interactive search + replace powered by ripgrep
       starship
       tealdeer
-      unstable.eza
-      unstable.helix
-      unstable.skim 
       watchexec
       zellij
       zlib
       zoxide
-  ] ++ fishplugins;
+  ];
+  allPackages = unstablePackages ++ stablePackages;
+in {
+  environment.systemPackages = {
+    withFish = allPackages ++ fishPlugins;
+  }."${packagesType}" or allPackages;
 }
