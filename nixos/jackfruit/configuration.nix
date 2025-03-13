@@ -58,6 +58,7 @@ in {
     unstable.smartcat
     unstable.teleport
     unstable.television
+    unstable.aider-chat
   ];
 
   # Gotta have my flakes.
