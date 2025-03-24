@@ -1,5 +1,6 @@
 { pkgs, unstable, packagesType ? "", ... }:
 let
+  jjui = pkgs.callPackage ./jjui.nix { inherit pkgs; };
   fishPlugins = with pkgs.fishPlugins; [
     hydro
     sponge
@@ -9,6 +10,7 @@ let
       eza
       helix
       skim 
+      jjui
   ];
   stablePackages = with pkgs; [
       bat     # `cat` but better.
