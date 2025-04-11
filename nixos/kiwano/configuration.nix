@@ -11,6 +11,7 @@ let
   commonUserArgs = {
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDqd3hnGqK9vb/GPW4kOLr1glLw83wIO5M0nGQlvSqVU Kevin Blaesing <kevin.blaesing@gmail.com>"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNrKHFuUXgCRARRT9I7aoTixvbmBSXLIKGDirxVGDtN kevin@jackfruit"
     ];
   };
 in {
@@ -22,6 +23,7 @@ in {
     ./samba.nix # Enable SMB sharing.
     ./cf_tunnel.nix
     ./caddy.nix
+    ./soft-serve.nix
   ];
   system.stateVersion = "23.11"; # Don't change this!
   networking.hostName = "kiwano";
