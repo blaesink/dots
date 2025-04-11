@@ -22,7 +22,6 @@ in {
     ./hardware-configuration.nix
     ./samba.nix # Enable SMB sharing.
     ./cf_tunnel.nix
-    ./caddy.nix
     ./soft-serve.nix
   ];
   system.stateVersion = "23.11"; # Don't change this!
@@ -35,14 +34,6 @@ in {
     allowedUDPPorts = [ 7844 ];
     extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
   };
-
-  # Don't need here. Just set manually.
-  networking.networkmanager.enable = false;
-  networking.useDHCP = true;
-  networking.interfaces.enp0s31f6.ipv4.addresses = [{
-    address = "192.168.1.32";
-    prefixLength = 24;
-  }];
 
   age = {
     secrets.cf_tun_tok.file = ../secrets/cloudflare_tunnel_token.age;
