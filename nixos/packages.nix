@@ -1,6 +1,5 @@
 { pkgs, unstable, packagesType ? "", ... }:
 let
-  jjui = pkgs.callPackage ./jjui.nix { inherit pkgs; };
   fishPlugins = with pkgs.fishPlugins; [
     hydro
     sponge

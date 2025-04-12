@@ -1,5 +1,5 @@
 source ~/.config/fish/k8s.fish
-source ~/.config/fish/television.fish
+# source ~/.config/fish/television.fish
 
 set fish_greeting
 
