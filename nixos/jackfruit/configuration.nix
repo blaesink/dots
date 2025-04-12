@@ -59,6 +59,7 @@ in {
     unstable.teleport
     unstable.television
     unstable.aider-chat
+    unstable.cloudflared
   ];
 
   # Gotta have my flakes.
