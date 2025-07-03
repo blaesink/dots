@@ -38,4 +38,4 @@ auto-format = true
 
 [language.formatter]
 command = "ocamlformat"
-args = [ "-" ]
+args = [ "-", "--impl" ]
