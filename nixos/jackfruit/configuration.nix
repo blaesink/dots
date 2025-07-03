@@ -60,6 +60,7 @@ in {
     unstable.television
     unstable.aider-chat
     unstable.cloudflared
+    unstable.gemini-cli
   ];
 
   # Gotta have my flakes.
