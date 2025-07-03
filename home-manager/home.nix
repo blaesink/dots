@@ -35,6 +35,7 @@
     ".config/qtile/config.py".source = dotfiles/qtile/config.py;
     ".config/zellij/config.kdl".source = dotfiles/zellij/config.kdl;
     ".config/hypr/hyprland.conf".source = dotfiles/hyprland/hyprland.conf;
+    ".config/jj/config.toml".source = dotfiles/jj/config.toml;
     ".gitconfig".source = dotfiles/git/gitconfig;
     ".wezterm.lua".source = dotfiles/wezterm/wezterm.lua;
     };

@@ -1,0 +1,26 @@
+revsets.log = "main::"
+
+[revset-aliases]
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+
+[aliases]
+tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
+
+[user]
+name = "Kevin Blaesing"
+email = "kevin.blaesing@aidn.ai"
+
+[ui]
+default-command = ["log", "--no-pager", "--reversed"]
+pager = ["delta", "--diff-so-fancy"]
+# diff.tool = ["delta", "--features", "+side-by-side"]
+diff.formatter = "git"
+merge-editor = "vimdiff"
+
+# Possible values: "curved" (default), "square", "ascii", "ascii-large"
+graph.style = "curved"
+
+[signing]
+behavior = "own"
+backend = "gpg"
+key = "F5C1966825F0BA4E"
