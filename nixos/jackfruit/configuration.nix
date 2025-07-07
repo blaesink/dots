@@ -61,6 +61,7 @@ in {
     unstable.aider-chat
     unstable.cloudflared
     unstable.gemini-cli
+    unstable.ragenix
   ];
 
   # Gotta have my flakes.
