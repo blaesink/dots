@@ -15,6 +15,7 @@ let
       bat     # `cat` but better.
       btop
       delta   # better `diff`
+      entr
       erdtree # better `tree`
       fd
       fish
