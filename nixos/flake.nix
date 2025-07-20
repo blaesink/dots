@@ -15,11 +15,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "github:ryantm/agenix";
+    copyparty.url = "github:9001/copyparty";
   };
 
   outputs = inputs@{
     nixos-wsl,
     agenix,
+    copyparty,
     ...
   }: 
     let
@@ -41,15 +43,16 @@
         };
         kiwano = inputs.nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ 
+          modules = [
             ./kiwano/configuration.nix
             inputs.disko.nixosModules.disko
             inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p53
             agenix.nixosModules.default
+            copyparty.nixosModules.default
           ];
-          specialArgs = { 
+          specialArgs = {
             inherit inputs;
-            inherit (inputs) agenix;
+            inherit (inputs) agenix copyparty;
           };
         };
         jackfruit = inputs.nixpkgs-latest.lib.nixosSystem {

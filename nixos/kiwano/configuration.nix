@@ -6,7 +6,7 @@
 # GPU:     NVIDIA Quadro T1000 Mobile
 # =============
 
-{ config, lib, pkgs, unstable, modulesPath, agenix, ... }: 
+{ config, lib, pkgs, modulesPath, agenix, copyparty, ... }: 
 let
   commonUserArgs = {
     openssh.authorizedKeys.keys = [
@@ -30,7 +30,7 @@ in {
   networking.firewall = {
     enable = true;
     allowPing = true;
-    allowedTCPPorts = [ 7844 ];
+    allowedTCPPorts = [ 7844 3923 ];
     allowedUDPPorts = [ 7844 ];
     extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
   };
@@ -101,6 +101,21 @@ in {
     lidSwitch = "ignore";
     lidSwitchDocked = "ignore";
     lidSwitchExternalPower = "ignore";
+  };
+
+  services.copyparty = {
+    enable = true;
+    package = copyparty.packages.${pkgs.system}.copyparty;
+    volumes = {
+      "/ben" = {
+        path = "/mnt/share/ben";
+        access.r = "*";
+      };
+    };
+    settings = {
+      i = "0.0.0.0";
+      xff-hdr = "cf-connecting-ip";
+    };
   };
 
   services.tlp.settings = {
