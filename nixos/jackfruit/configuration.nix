@@ -34,7 +34,7 @@ in {
   users.users.kevin = {
     isNormalUser = true;
     description  = "Kevin";
-    extraGroups  = [ "networkmanager" "wheel" "docker" ];
+    extraGroups  = [ "networkmanager" "wheel" "docker" "libvirtd" "kvm" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDqd3hnGqK9vb/GPW4kOLr1glLw83wIO5M0nGQlvSqVU Kevin Blaesing <kevin.blaesing@gmail.com>"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJv5IcxMlG6lbMdrbypSMQ6lvK/60icQ4TS3ivtuaFUJ"
@@ -52,6 +52,7 @@ in {
     pkgs.jq
     pkgs.pyright
     pkgs.ruff-lsp
+    pkgs.virt-manager
     unstable.ghq     # Does a git clone of stuff into a predetermined place
     unstable.k9s
     unstable.nixd
@@ -67,7 +68,27 @@ in {
   # Gotta have my flakes.
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  networking.hostName = "jackfruit";
+  networking = {
+    bridges.br0 = {
+      interfaces = [ "enp3s0"];
+    };
+    interfaces = {
+      br0.useDHCP = true;
+      enp3s0.useDHCP = false;
+    };
+    hostName = "jackfruit";
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        22
+        80
+        443
+        6379 # ray
+      ];
+      allowedUDPPorts = [ 6379 ];
+    };
+    
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -90,7 +111,7 @@ in {
 
   # Set up nvidia drivers etc.
   hardware.opengl = {
-    enable = true;
+    enable          = true;
     driSupport32Bit = true;
   };
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -101,12 +122,20 @@ in {
     package                = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  networking.firewall = {
+
+  virtualisation.libvirtd = {
     enable = true;
-    allowedTCPPorts = [
-      6379 # ray
-    ];
-    allowedUDPPorts = [ 6379 ];
+    qemu = {
+      package      = pkgs.qemu_kvm;
+      runAsRoot    = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable   = true;
+        packages = [
+          (pkgs.OVMF.override { secureBoot = true; tpmSupport = true; }).fd
+        ];
+      };
+    };
   };
   
 }
