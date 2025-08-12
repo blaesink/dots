@@ -51,7 +51,6 @@ in {
     unstable.coder
     pkgs.jq
     pkgs.pyright
-    pkgs.ruff-lsp
     pkgs.virt-manager
     unstable.ghq     # Does a git clone of stuff into a predetermined place
     unstable.k9s
@@ -69,14 +68,32 @@ in {
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking = {
+    hostName = "jackfruit";
+    defaultGateway = "192.168.1.1";
+    nameservers = [ "192.168.1.1" ];
+
     bridges.br0 = {
       interfaces = [ "enp3s0"];
     };
+
     interfaces = {
-      br0.useDHCP = true;
+      br0 = {
+        ipv4.addresses = [
+          {
+            address = "192.168.1.8";
+            prefixLength = 24;
+          }
+        ];
+        ipv4.routes = [
+          {
+            address = "192.168.1.1";
+            prefixLength = 16;
+          }
+        ];
+        useDHCP = false;
+      };
       enp3s0.useDHCP = false;
     };
-    hostName = "jackfruit";
     firewall = {
       enable = true;
       allowedTCPPorts = [
@@ -87,7 +104,6 @@ in {
       ];
       allowedUDPPorts = [ 6379 ];
     };
-    
   };
 
   # Some programs need SUID wrappers, can be configured further or are
