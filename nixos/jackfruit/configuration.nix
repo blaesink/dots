@@ -19,7 +19,7 @@ in {
     ../base.nix
     ../packages.nix
     ./hardware-configuration.nix
-    ./kube.nix
+    # ./kube.nix
   ];
 
   # Configure keymap in X11
