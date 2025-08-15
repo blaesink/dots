@@ -10,6 +10,7 @@ let
       helix
       skim 
       jjui
+      perl540Packages.vidir
   ];
   stablePackages = with pkgs; [
       bat     # `cat` but better.

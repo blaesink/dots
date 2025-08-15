@@ -42,6 +42,8 @@ in {
     shell = pkgs.fish;
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   environment.systemPackages = [
     pkgs.cudaPackages.cudatoolkit
     pkgs.cudaPackages.cudnn
