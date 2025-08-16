@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ ./modules ];
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -35,11 +36,11 @@
     ".config/qtile/config.py".source = dotfiles/qtile/config.py;
     ".config/zellij/config.kdl".source = dotfiles/zellij/config.kdl;
     ".config/hypr/hyprland.conf".source = dotfiles/hyprland/hyprland.conf;
-    ".config/jj/config.toml".source = dotfiles/jj/config.toml;
+    # ".config/jj/config.toml".source = dotfiles/jj/config.toml;
     ".gitconfig".source = dotfiles/git/gitconfig;
     ".wezterm.lua".source = dotfiles/wezterm/wezterm.lua;
     };
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  # programs.home-manager.enable = true;
 }

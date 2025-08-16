@@ -16,12 +16,17 @@
     };
     agenix.url = "github:ryantm/agenix";
     copyparty.url = "github:9001/copyparty";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs-latest";
+    };
   };
 
   outputs = inputs@{
     nixos-wsl,
     agenix,
     copyparty,
+    home-manager,
     ...
   }: 
     let
@@ -57,7 +62,15 @@
         };
         jackfruit = inputs.nixpkgs-latest.lib.nixosSystem {
           inherit system;
-          modules = [ ./jackfruit/configuration.nix ];
+          modules = [
+            ./jackfruit/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.kevin = home-manager/jackfruit.nix;
+            }
+           ];
           specialArgs = {
             inherit nixpkgs-latest unstable system; 
             packagesType="withFish";

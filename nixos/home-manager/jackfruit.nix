@@ -1,8 +1,9 @@
-{ config, pkgs, ...}:
+{...}:
 {
-  imports = [ ./home.nix ];
+  imports = [ ./home.nix ./modules/jj.nix ];
+  custom.jj.enable = true;
   home.username = "kevin";
-  home.homeDirectory = "/home/kevin/";
+  home.homeDirectory = "/home/kevin";
   home.file.".config/fish/television.fish".source = dotfiles/fish/television.fish;
   home.file.".config/starship.toml".source = dotfiles/starship/config.toml;
 }

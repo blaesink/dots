@@ -24,6 +24,7 @@ let
       gcc13
       git
       gnumake
+      home-manager
       just
       procs   # Better `ps`.
       ripgrep
