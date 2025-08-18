@@ -59,7 +59,6 @@ in {
     unstable.nixd
     unstable.smartcat
     unstable.teleport
-    unstable.television
     unstable.aider-chat
     unstable.cloudflared
     unstable.gemini-cli
