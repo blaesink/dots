@@ -34,7 +34,7 @@
     ".config/helix/config.toml".source = dotfiles/helix/config.toml;
     ".config/helix/languages.toml".source = dotfiles/helix/languages.toml;
     ".config/qtile/config.py".source = dotfiles/qtile/config.py;
-    ".config/zellij/config.kdl".source = dotfiles/zellij/config.kdl;
+    # ".config/zellij/config.kdl".source = dotfiles/zellij/config.kdl;
     ".config/hypr/hyprland.conf".source = dotfiles/hyprland/hyprland.conf;
     # ".config/jj/config.toml".source = dotfiles/jj/config.toml;
     ".gitconfig".source = dotfiles/git/gitconfig;
