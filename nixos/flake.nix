@@ -66,9 +66,12 @@
             ./jackfruit/configuration.nix
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.kevin = home-manager/jackfruit.nix;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.kevin = home-manager/jackfruit.nix;
+                extraSpecialArgs = { inherit unstable; };
+              };
             }
            ];
           specialArgs = {

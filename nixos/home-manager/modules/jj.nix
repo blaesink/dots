@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  unstable,
   userVars ? {},
   ...
 }: let
@@ -28,7 +29,7 @@ in {
 
     packages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
-      default = with pkgs; [ jjui ];
+      default = with unstable; [ jjui ];
       description = "Additional Jujutsu-related packages to install";
     };
 
@@ -95,6 +96,7 @@ in {
     home.packages = cfg.packages;
 
     programs.jujutsu = {
+      package = unstable.jujutsu;
       enable = true;
       settings = lib.mergeAttrs cfg.settings {
         user = {

@@ -5,11 +5,9 @@ let
     sponge
   ];
   unstablePackages = with unstable; [
-      jujutsu
       eza
       helix
       skim 
-      jjui
       perl540Packages.vidir
   ];
   stablePackages = with pkgs; [
