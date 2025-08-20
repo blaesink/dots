@@ -31,7 +31,7 @@
 
     ".config/fish/config.fish".source = dotfiles/fish/config.fish;
     ".config/fish/k8s.fish".source = dotfiles/fish/k8s.fish;
-    ".config/helix/config.toml".source = dotfiles/helix/config.toml;
+    # ".config/helix/config.toml".source = dotfiles/helix/config.toml;
     ".config/helix/languages.toml".source = dotfiles/helix/languages.toml;
     ".config/qtile/config.py".source = dotfiles/qtile/config.py;
     # ".config/zellij/config.kdl".source = dotfiles/zellij/config.kdl;

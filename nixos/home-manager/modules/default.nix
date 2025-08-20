@@ -1,3 +1,8 @@
 {
-  imports = [ ./jj.nix ./starship.nix ./zellij.nix ];
+  imports = [
+    ./jj.nix
+    ./starship.nix
+    ./zellij.nix
+    ./helix.nix
+  ];
 }
