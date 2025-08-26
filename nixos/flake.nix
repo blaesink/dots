@@ -33,6 +33,16 @@
       system = "x86_64-linux";
       unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true;};
       nixpkgs-latest = import inputs.nixpkgs-latest { inherit system; config.allowUnfree = true; };
+      supportedSystems = [
+      "x86_64-linux" # 64-bit Intel/AMD Linux
+      "aarch64-linux" # 64-bit ARM Linux
+      "x86_64-darwin" # 64-bit Intel macOS
+      "aarch64-darwin" # 64-bit ARM macOS
+    ];
+    # Helper to provide system-specific attributes
+    perSystem = f: inputs.nixpkgs.lib.genAttrs supportedSystems (system: f {
+      pkgs = import inputs.nixpkgs { inherit system; };
+    });
     in {
       nixosConfigurations = {
         wsl = inputs.nixpkgs-latest.lib.nixosSystem {
@@ -80,5 +90,10 @@
           };
         };
       };
+      devShells = perSystem ({pkgs}: {
+        default = pkgs.mkShellNoCC {
+          packages = with pkgs; [nix-output-monitor];
+        };
+      });
     };
 }
