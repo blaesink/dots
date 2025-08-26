@@ -32,6 +32,12 @@
     ".config/fish/config.fish".source = dotfiles/fish/config.fish;
     ".config/fish/k8s.fish".source = dotfiles/fish/k8s.fish;
     # ".config/helix/config.toml".source = dotfiles/helix/config.toml;
+    ".config/helix/themes/nyxvamp-radiance.toml".source = dotfiles/helix/nyxvamp-radiance.toml;
+    ".config/helix/themes/nyxvamp-veil.toml".source = dotfiles/helix/nyxvamp-veil.toml;
+    ".config/helix/themes/nyxvamp-transparent.toml".source = dotfiles/helix/nyxvamp-transparent.toml;
+    ".config/helix/themes/taffy16.toml".source = dotfiles/helix/taffy16.toml;
+    ".config/helix/themes/cyberdream.toml".source = dotfiles/helix/cyberdream.toml;
+    ".config/helix/themes/cyberdream-light.toml".source = dotfiles/helix/cyberdream-light.toml;
     ".config/helix/languages.toml".source = dotfiles/helix/languages.toml;
     ".config/qtile/config.py".source = dotfiles/qtile/config.py;
     # ".config/zellij/config.kdl".source = dotfiles/zellij/config.kdl;
