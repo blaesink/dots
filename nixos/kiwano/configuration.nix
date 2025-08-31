@@ -36,8 +36,14 @@ in {
   };
 
   age = {
-    secrets.cf_tun_tok.file = ../secrets/cloudflare_tunnel_token.age;
-    secrets.cf_token.file = ../secrets/cloudflare_token.age;
+    secrets = {
+      cf_tun_tok.file = ../secrets/cloudflare_tunnel_token.age;
+      cf_token.file = ../secrets/cloudflare_token.age;
+      copyparty_kevin_pw = {
+        file = ../secrets/copyparty_kevin_pw.age;
+        owner = "copyparty";
+      };
+    };
     identityPaths = [ "/root/.ssh/localKey" ];
   };
 
@@ -106,10 +112,20 @@ in {
   services.copyparty = {
     enable = true;
     package = copyparty.packages.${pkgs.system}.copyparty;
+    accounts = {
+      kevin.passwordFile = "/run/agenix/copyparty_kevin_pw";
+    };
     volumes = {
       "/ben" = {
         path = "/mnt/share/ben";
         access.r = "*";
+      };
+      "/wedding" = {
+        path = "/mnt/share/wedding";
+        access = {
+          r = "*";
+          rw = [ "kevin" ];
+        };
       };
     };
     settings = {
