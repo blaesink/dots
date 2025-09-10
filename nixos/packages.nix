@@ -34,9 +34,13 @@ let
       zlib
       zoxide
   ];
-  allPackages = unstablePackages ++ stablePackages;
+  mkPackages = (type:
+    let
+      base = stablePackages ++ unstablePackages;
+      withFish = base ++ fishPlugins;
+    in
+      { inherit base withFish; }.type or base);
+    
 in {
-  environment.systemPackages = {
-    withFish = allPackages ++ fishPlugins;
-  }."${packagesType}" or allPackages;
+  environment.systemPackages = mkPackages packagesType;
 }
