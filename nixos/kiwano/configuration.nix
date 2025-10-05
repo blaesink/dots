@@ -121,7 +121,7 @@ in {
         access.r = "*";
       };
       "/wedding" = {
-        path = "/mnt/share/wedding";
+        path = "/mnt/share/junkyard/Wedding/Photos";
         access = {
           r = "*";
           rw = [ "kevin" ];

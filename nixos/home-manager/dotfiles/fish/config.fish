@@ -19,11 +19,8 @@ set -gx GHQ_ROOT $HOME/prj
 
 # Aliases
 if type -q eza
-    alias ls="eza -l"
-    alias la="eza -la"
-else if type -q exa
-    alias ls="exa -l"
-    alias la="exa -la"
+    alias ls="eza --git-ignore"
+    alias la="eza -a"
 end
 
 alias cat="bat"
@@ -76,7 +73,6 @@ end
 
 alias zjs zellij-select
 alias gfs git-fuzzy-switch
-
 
 # Mimic Bash's !!
 function last_history_item

@@ -39,3 +39,7 @@ auto-format = true
 [language.formatter]
 command = "ocamlformat"
 args = [ "-", "--impl" ]
+
+[[language]]
+name = "nix"
+auto-format = true
