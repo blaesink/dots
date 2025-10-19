@@ -1,46 +1,33 @@
 { pkgs, unstable, packagesType ? "", ... }:
 let
-  fishPlugins = with pkgs.fishPlugins; [
-    hydro
-    sponge
-  ];
-  unstablePackages = with unstable; [
-      eza
-      helix
-      skim 
-      perl540Packages.vidir
-  ];
+  fishPlugins = with pkgs.fishPlugins; [ hydro sponge ];
+  unstablePackages = with unstable; [ eza helix skim perl540Packages.vidir ];
   stablePackages = with pkgs; [
-      bat     # `cat` but better.
-      btop
-      delta   # better `diff`
-      entr
-      erdtree # better `tree`
-      fd
-      fish
-      fzy     # fzf with "better default behavior".
-      gcc13
-      git
-      gnumake
-      home-manager
-      just
-      procs   # Better `ps`.
-      ripgrep
-      repgrep # interactive search + replace powered by ripgrep
-      starship
-      tealdeer
-      watchexec
-      zellij
-      zlib
-      zoxide
+    bat # `cat` but better.
+    btop
+    delta # better `diff`
+    entr
+    erdtree # better `tree`
+    fd
+    fish
+    gcc13
+    git
+    gnumake
+    home-manager
+    just
+    procs # Better `ps`.
+    ripgrep
+    repgrep # interactive search + replace powered by ripgrep
+    tealdeer
+    watchexec
+    zellij
+    zlib
+    zoxide
   ];
   mkPackages = (type:
     let
       base = stablePackages ++ unstablePackages;
       withFish = base ++ fishPlugins;
-    in
-      { inherit base withFish; }.type or base);
-    
-in {
-  environment.systemPackages = mkPackages packagesType;
-}
+    in { inherit base withFish; }.type or base);
+
+in { environment.systemPackages = mkPackages packagesType; }

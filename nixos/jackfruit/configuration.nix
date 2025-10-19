@@ -44,7 +44,6 @@ in {
     pkgs.mkl
 
     # Dev tools I just don't want to keep installing in a flake right now:
-    unstable.coder
     pkgs.jq
     pkgs.pyright
     pkgs.virt-manager
