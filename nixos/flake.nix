@@ -92,7 +92,7 @@
       };
       devShells = perSystem ({pkgs}: {
         default = pkgs.mkShellNoCC {
-          packages = with pkgs; [nix-output-monitor];
+          packages = with pkgs; [ nix-output-monitor nixfmt ];
         };
       });
     };
