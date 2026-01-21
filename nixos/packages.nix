@@ -1,7 +1,7 @@
 { pkgs, unstable, packagesType ? "", ... }:
 let
   fishPlugins = with pkgs.fishPlugins; [ hydro sponge ];
-  unstablePackages = with unstable; [ eza helix skim perl540Packages.vidir ];
+  unstablePackages = with unstable; [ eza helix skim moreutils ];
   stablePackages = with pkgs; [
     bat # `cat` but better.
     btop
