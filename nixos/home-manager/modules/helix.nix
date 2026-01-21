@@ -5,7 +5,7 @@ let
 in {
   options.custom.helix = {
     enable = lib.mkEnableOption "helix editor";
-    package = lib.mkPackageOption pkgs "helix" {};
+    package = lib.mkPackageOption pkgs "helix" { };
 
     settings = lib.mkOption {
       type = lib.types.attrs;
@@ -24,7 +24,18 @@ in {
         };
         keys = {
           insert = { j.k = "normal_mode"; };
-          normal = { ret = "goto_word"; };
+          normal = {
+            ret = "goto_word";
+            b = {
+              r = ":reload";
+              R = ":reload-all";
+              p = ":buffer-previous";
+              n = ":buffer-next";
+              q = ":buffer-close";
+              w = ":write-buffer-close";
+              s = ":write";
+            };
+          };
         };
       };
     };
