@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
-    nixpkgs-latest.url = "github:nixos/nixpkgs?ref=nixos-25.05";
+    nixpkgs-latest.url = "github:nixos/nixpkgs?ref=nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl/main";
@@ -11,49 +11,47 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     disko = {
-      url = "github:nix-community/disko/611c9ea53250f7bb22286b3d26872280a0e608f9";
+      url =
+        "github:nix-community/disko/611c9ea53250f7bb22286b3d26872280a0e608f9";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "github:ryantm/agenix";
     copyparty.url = "github:9001/copyparty";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs-latest";
     };
   };
 
-  outputs = inputs@{
-    nixos-wsl,
-    agenix,
-    copyparty,
-    home-manager,
-    ...
-  }: 
+  outputs = inputs@{ nixos-wsl, agenix, copyparty, home-manager, ... }:
     let
       system = "x86_64-linux";
-      unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true;};
-      nixpkgs-latest = import inputs.nixpkgs-latest { inherit system; config.allowUnfree = true; };
+      unstable = import inputs.nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      nixpkgs-latest = import inputs.nixpkgs-latest {
+        inherit system;
+        config.allowUnfree = true;
+      };
       supportedSystems = [
-      "x86_64-linux" # 64-bit Intel/AMD Linux
-      "aarch64-linux" # 64-bit ARM Linux
-      "x86_64-darwin" # 64-bit Intel macOS
-      "aarch64-darwin" # 64-bit ARM macOS
-    ];
-    # Helper to provide system-specific attributes
-    perSystem = f: inputs.nixpkgs.lib.genAttrs supportedSystems (system: f {
-      pkgs = import inputs.nixpkgs { inherit system; };
-    });
+        "x86_64-linux" # 64-bit Intel/AMD Linux
+        "aarch64-linux" # 64-bit ARM Linux
+        "x86_64-darwin" # 64-bit Intel macOS
+        "aarch64-darwin" # 64-bit ARM macOS
+      ];
+      # Helper to provide system-specific attributes
+      perSystem = f:
+        inputs.nixpkgs.lib.genAttrs supportedSystems
+        (system: f { pkgs = import inputs.nixpkgs { inherit system; }; });
     in {
       nixosConfigurations = {
         wsl = inputs.nixpkgs-latest.lib.nixosSystem {
           inherit system;
-          modules = [ 
-            ./wsl/configuration.nix
-            nixos-wsl.nixosModules.default
-          ];
+          modules = [ ./wsl/configuration.nix nixos-wsl.nixosModules.default ];
           specialArgs = {
-            inherit unstable nixpkgs-latest system; 
-            packagesType="withFish";
+            inherit unstable nixpkgs-latest system;
+            packagesType = "withFish";
           };
         };
         kiwano = inputs.nixpkgs.lib.nixosSystem {
@@ -83,14 +81,14 @@
                 extraSpecialArgs = { inherit unstable; };
               };
             }
-           ];
+          ];
           specialArgs = {
-            inherit nixpkgs-latest unstable system; 
-            packagesType="withFish";
+            inherit nixpkgs-latest unstable system;
+            packagesType = "withFish";
           };
         };
       };
-      devShells = perSystem ({pkgs}: {
+      devShells = perSystem ({ pkgs }: {
         default = pkgs.mkShellNoCC {
           packages = with pkgs; [ nix-output-monitor nixfmt ];
         };
