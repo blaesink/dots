@@ -1,4 +1,4 @@
-{ lib, config, pkgs, unstable, userVars ? { }, ... }:
+{ lib, config, pkgs, userVars ? { }, ... }:
 let cfg = config.custom.jj;
 in {
   options.custom.jj = {
@@ -22,7 +22,7 @@ in {
 
     packages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
-      default = with unstable; [ jjui ];
+      default = [ pkgs.jjui ];
       description = "Additional Jujutsu-related packages to install";
     };
 
@@ -84,7 +84,7 @@ in {
     home.packages = cfg.packages;
 
     programs.jujutsu = {
-      package = unstable.jujutsu;
+      package = pkgs.jujutsu;
       enable = true;
       settings = lib.mergeAttrs cfg.settings {
         user = {

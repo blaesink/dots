@@ -21,9 +21,13 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs-latest";
     };
+    macos = {
+      url = "path:./macos";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
-  outputs = inputs@{ nixos-wsl, agenix, copyparty, home-manager, ... }:
+  outputs = inputs@{ nixos-wsl, agenix, copyparty, home-manager, macos, ... }:
     let
       system = "x86_64-linux";
       unstable = import inputs.nixpkgs-unstable {
@@ -93,5 +97,6 @@
           packages = with pkgs; [ nix-output-monitor nixfmt ];
         };
       });
+      darwinConfigurations = macos.outputs.darwinConfigurations;
     };
 }

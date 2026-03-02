@@ -1,7 +1,7 @@
 { pkgs, unstable, packagesType ? "", ... }:
 let
   fishPlugins = with pkgs.fishPlugins; [ hydro sponge ];
-  unstablePackages = with unstable; [ eza helix skim moreutils ];
+  unstablePackages = with unstable; [ eza helix skim moreutils jujutsu jjui ];
   stablePackages = with pkgs; [
     bat # `cat` but better.
     btop
@@ -10,7 +10,6 @@ let
     erdtree # better `tree`
     fd
     fish
-    gcc13
     git
     gnumake
     home-manager
