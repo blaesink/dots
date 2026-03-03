@@ -2,6 +2,7 @@
 let
   cfg = config.custom.helix;
   toml = pkgs.formats.toml { };
+  default-theme = "darcula";
 in {
   options.custom.helix = {
     enable = lib.mkEnableOption "helix editor";
@@ -10,7 +11,7 @@ in {
     settings = lib.mkOption {
       type = lib.types.attrs;
       default = {
-        theme = "darcula";
+        theme = default-theme;
         editor = {
           true-color = true;
           line-number = "relative";
@@ -34,6 +35,10 @@ in {
               q = ":buffer-close";
               w = ":write-buffer-close";
               s = ":write";
+            };
+            space.t = {
+              "0" = ":theme ${cfg.settings.theme or default-theme}";
+              "1" = ":theme rose_pine_dawn";
             };
           };
         };
