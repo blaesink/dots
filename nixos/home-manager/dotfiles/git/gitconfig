@@ -11,7 +11,7 @@
     mv = move          # branchless
 
 [delta]
-    side-by-side           = true
+    side-by-side           = false
     navigate               = true       # use n and N to move between diff sections
     light                  = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
     features               = unobtrusive-line-numbers decorations
@@ -43,3 +43,6 @@
 [user]
 	name = Kevin Blaesing
 	email = kevin.blaesing@gmail.com
+
+[url "github-wwt:"]
+    insteadOf = "https://github.com/"

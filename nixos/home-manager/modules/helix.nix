@@ -37,8 +37,8 @@ in {
               s = ":write";
             };
             space.t = {
-              "0" = ":theme ${cfg.settings.theme or default-theme}";
-              "1" = ":theme rose_pine_dawn";
+              "1" = ":theme ${cfg.settings.theme or default-theme}";
+              "2" = ":theme rose_pine_dawn";
             };
           };
         };

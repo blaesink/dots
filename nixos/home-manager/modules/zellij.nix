@@ -17,22 +17,15 @@ in {
       defaultText = lib.literalExpression "\${config.xdg.configHome}/zellij/config.kdl";
     };
 
-    zmate = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Whether to enable zmate";
-      };
-      package = lib.mkPackageOption pkgs "zmate" { nullable = true; };
-    };
-
     settings = lib.mkOption {
       type = lib.types.attrs;
       default = {
-        keybinds = {
-          unbind = "Ctrl o";
+        "keybinds" = {
+          "unbind \"Ctrl o\"" = {};
           normal = {
             "bind \"Ctrl k\"" = { SwitchToMode = "session"; };
+            "unbind \"Alt o\"" = {};
+            "unbind \"Alt i\"" = {};
           };
         };
       };
@@ -44,12 +37,10 @@ in {
       packages =
         []
         ++ lib.optional (cfg.package != null) cfg.package
-        ++ lib.optional cfg.zmate.enable cfg.zmate.package
       ;
 
-      file.${cfg.configPath} = lib.mkIf ( cfg.settings != {} ) {
-        text = toKDL cfg.settings;
-      };
+      # file.${cfg.configPath} = lib.mkIf ( cfg.settings != {} ) {
+      file.${cfg.configPath}.text = toKDL cfg.settings;
     };
   };
 }
