@@ -7,26 +7,21 @@
         url = "github:nix-darwin/nix-darwin/master";
         inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-casks = {
-      url = "github:atahanyorganci/nix-casks/archive";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-casks, ... }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-homebrew, ... }:
   let
     system = "aarch64-darwin";
     configuration = { pkgs, ... }:
-    let
-      nixcasks = nix-casks.packages.${pkgs.system};
-    in {
+    {
         imports = [
-          (import ./container.nix { container = pkgs.container; })
           ./unfree.nix
+          ./services/colima.nix
           ./services/syncthing.nix
           (import ../packages.nix { inherit pkgs; unstable = pkgs; })
         ];
@@ -34,12 +29,17 @@
         # $ nix-env -qaP | grep wget
         environment.systemPackages =
           with pkgs; [
-            container # macos' new container system. currently at 0.9 but I'll pin it later
-            codex
             cloudflared
+            colima
+            dive
+            docker
+            docker-buildx
+            docker-compose
+            gh          # github cli
             ghostty-bin # macos can't be built just yet
-            jjui # NOTE: planning to bump to 0.10.x when I can. Would just need to point to the new version on GH.
-            obsidian # unfree
+            lima
+            obsidian    # unfree
+            windsurf
           ];
 
         environment.shells = [ pkgs.fish ];
@@ -64,6 +64,19 @@
         nixpkgs.hostPlatform = "aarch64-darwin";
 
         services.syncthing.enable = true; 
+
+        homebrew = {
+          enable = true;
+          brews = [];
+          casks = [
+            "1password"
+            "zen"
+            "codex"
+            "microsoft-teams"
+            "slack"
+            "windows-app"
+          ];
+        };
     };
   in
   {
@@ -72,6 +85,13 @@
     darwinConfigurations."MacBook-Pro" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
+        nix-homebrew.darwinModules.nix-homebrew
+        {
+          nix-homebrew = {
+            enable = true;
+            user = "kevin";
+          };
+        }
       ];
     };
   };
