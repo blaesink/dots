@@ -75,6 +75,7 @@
             "microsoft-teams"
             "slack"
             "windows-app"
+            "claude-code"
           ];
         };
     };
