@@ -39,7 +39,7 @@
             ghostty-bin # macos can't be built just yet
             lima
             obsidian    # unfree
-            windsurf
+            openscad-unstable
           ];
 
         environment.shells = [ pkgs.fish ];
@@ -70,12 +70,13 @@
           brews = [];
           casks = [
             "1password"
-            "zen"
-            "codex"
+            "bitwarden"
+            "claude-code@latest"
             "microsoft-teams"
+            "orcaslicer"
             "slack"
             "windows-app"
-            "claude-code"
+            "zen"
           ];
         };
     };
